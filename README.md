@@ -3,16 +3,20 @@
 Shared agent skills for Liskov V5+ applications, maintained by PROOF Computer.
 One source serves Claude Code and Codex. Skills are organized by user task.
 
-**Status: implementation scaffold. No installable skill has been released.**
-The first planned skill is `liskov-policy`: create and validate a reviewable
-application policy. V4 authoring and migration are outside the scope.
+**Status: unreleased.** The shared source is `skills/liskov-policy/`.
+Plugin manifests are version `0.0.0`, which is not a release and not a GitHub
+release. No released skill is announced. V4 authoring and migration are
+outside the scope. Install commands for the unreleased package are in
+[docs/installation.md](docs/installation.md).
 
 ## Layout
 
 - `skills/liskov-policy/`: canonical skill instructions, references and assets.
 - `evals/`: one evaluation corpus exercised in both supported agents.
 - `tests/`: deterministic repository and skill checks.
-- `docs/`: authoring contract, installation and release documentation.
+- `docs/`: authoring contract and installation for the unreleased package.
+- `.claude-plugin/` and `.codex-plugin/`: thin tool manifests. They do not
+  fork `skills/liskov-policy/`.
 - `scripts/validate.py`: structural validation shared by CI and the Gas City gate.
 
 Keep agent-specific installation metadata small. Do not maintain separate Claude
