@@ -6,8 +6,9 @@ repositories, machine-local paths, credentials or internal operator commands.
 
 ## Design
 
-- Maintain one skill source per user task. The first is
-  `skills/liskov-policy/SKILL.md`; it is intentionally absent until implemented.
+- Maintain one skill source per user task. `skills/liskov-policy/SKILL.md`
+  is the released task. Other directories under `skills/` are further tasks
+  in this tree; they are not a release until a tag says so.
 - Keep shared instructions, references and assets in that skill's directory.
   Tool-specific metadata and packaging must not fork the workflow.
 - V5 and later supported versions only. Select an exact schema pair, preserve
@@ -15,6 +16,8 @@ repositories, machine-local paths, credentials or internal operator commands.
 - Consume the supported Liskov CLI and authoritative validators. Do not copy a
   private schema or implement a competing policy compiler here.
 - Drafting must not publish, deploy or spend. Use secret references, not values.
+  A later task skill may name a mutation only inside its own command boundary,
+  and only after the user has said yes.
 - A release must pass the same evaluation cases in Claude Code and Codex.
   Missing live-agent evidence is a release limitation, never a passing result.
 
