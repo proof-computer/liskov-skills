@@ -35,7 +35,7 @@ _ORCHESTRATOR_URL = re.compile(
     + r"(?:/\S*)?",
     re.IGNORECASE,
 )
-_LINK = re.compile(r"\[[^\]]*\]\(<([^>]+)>\)|\[[^\]]*\]\(([^)\s]+)")
+_LINK = re.compile(r"\[[^\]\n]*\]\(<([^>\n]+)>\)|\[[^\]\n]*\]\(([^)\s\n]+)\)")
 
 
 def _load_json(path):
@@ -113,6 +113,10 @@ def _reference_errors(root, skill_root):
                 target = target.strip("<>")
             target = target.split("#", 1)[0].split("?", 1)[0].strip()
             if target == "" or "://" in target or target.startswith(("mailto:", "#")):
+                continue
+            # A character class in prose can look like a markdown link.
+            # Skill file references do not contain these characters.
+            if any(char in target for char in "{}[]^*"):
                 continue
             resolved = (path.parent / target).resolve()
             relative = path.relative_to(root).as_posix()

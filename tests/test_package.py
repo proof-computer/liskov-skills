@@ -17,15 +17,8 @@ SPEC.loader.exec_module(package_check)
 
 CLAUDE_VERSION = "2.1.283"
 CODEX_VERSION = "0.157.1"
-FIXTURE_SKILL = """---
-name: fixture-skill
-description: Temporary packaging fixture. Not a released skill.
----
-
-Read [the note](references/note.md) before using this fixture.
-"""
-FIXTURE_NOTE = "fixture-reference\n"
-UPDATED_NOTE = "fixture-reference-updated\n"
+REAL_SKILL = Path("skills") / "liskov-policy"
+UPDATED_NOTE = "integration-reference-updated\n"
 OPERATOR_CONFIG = (
     Path.home() / ".claude.json",
     Path.home() / ".claude" / "settings.json",
@@ -224,16 +217,15 @@ class PackageInstallTests(unittest.TestCase):
         if result.returncode != 0 or version not in result.stdout + result.stderr:
             self.fail(f"missing: {command} {version} is not available ({result.stdout!r} {result.stderr!r})")
 
-    def _fixture(self, root):
+    def _plugin_copy(self, root):
         shutil.copytree(
             REPO,
             root,
             ignore=shutil.ignore_patterns(".git", "__pycache__"),
         )
-        skill = root / "skills" / "fixture-skill"
-        (skill / "references").mkdir(parents=True)
-        (skill / "SKILL.md").write_text(FIXTURE_SKILL, encoding="utf-8")
-        (skill / "references" / "note.md").write_text(FIXTURE_NOTE, encoding="utf-8")
+        skill = root / REAL_SKILL
+        self.assertTrue((skill / "SKILL.md").is_file())
+        self.assertEqual((REPO / REAL_SKILL / "SKILL.md").read_bytes(), (skill / "SKILL.md").read_bytes())
         self.assertEqual(package_check.check_package(root), [])
         catalog = root / ".agents" / "plugins"
         catalog.mkdir(parents=True)
@@ -251,16 +243,16 @@ class PackageInstallTests(unittest.TestCase):
         })
         return skill
 
-    def test_claude_and_codex_discover_the_same_fixture_references(self):
+    def test_claude_and_codex_discover_the_real_skill_references(self):
         self._require("claude", CLAUDE_VERSION)
         self._require("codex", CODEX_VERSION)
         with tempfile.TemporaryDirectory() as directory:
             base = Path(directory)
             root = base / "plugin"
-            skill = self._fixture(root)
+            skill = self._plugin_copy(root)
             source_skill = (skill / "SKILL.md").read_bytes()
             source_note = _linked_reference(skill / "SKILL.md").read_bytes()
-            self.assertEqual(source_note, FIXTURE_NOTE.encode("utf-8"))
+            self.assertEqual(source_skill, (REPO / REAL_SKILL / "SKILL.md").read_bytes())
 
             claude_home = base / "claude-home"
             project = base / "project"
@@ -283,7 +275,8 @@ class PackageInstallTests(unittest.TestCase):
                 claude_env,
             )
             self.assertEqual(details.returncode, 0, details.stderr)
-            self.assertIn("fixture-skill", details.stdout)
+            self.assertIn("liskov-policy", details.stdout)
+            self.assertNotIn("fixture-skill", details.stdout)
 
             added = _run(
                 ["claude", "plugin", "marketplace", "add", str(root), "--scope", "local"],
@@ -303,7 +296,7 @@ class PackageInstallTests(unittest.TestCase):
                 item for item in _parse_json(listing.stdout)
                 if item.get("id") == "liskov-policy@liskov-skills"
             )
-            claude_skill = Path(claude_row["installPath"]) / "skills" / "fixture-skill" / "SKILL.md"
+            claude_skill = Path(claude_row["installPath"]) / REAL_SKILL / "SKILL.md"
             self.assertEqual(claude_skill.read_bytes(), source_skill)
             self.assertEqual(_linked_reference(claude_skill).read_bytes(), source_note)
 
@@ -328,7 +321,7 @@ class PackageInstallTests(unittest.TestCase):
             )
             self.assertEqual(added_plugin.returncode, 0, added_plugin.stderr)
             codex_info = _parse_json(added_plugin.stdout)
-            codex_skill = Path(codex_info["installedPath"]) / "skills" / "fixture-skill" / "SKILL.md"
+            codex_skill = Path(codex_info["installedPath"]) / REAL_SKILL / "SKILL.md"
             self.assertEqual(codex_skill.read_bytes(), source_skill)
             self.assertEqual(_linked_reference(codex_skill).read_bytes(), source_note)
             self.assertEqual(claude_skill.read_bytes(), codex_skill.read_bytes())
@@ -349,7 +342,7 @@ class PackageInstallTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             base = Path(directory)
             root = base / "plugin"
-            skill = self._fixture(root)
+            skill = self._plugin_copy(root)
             claude_home = base / "claude-home"
             project = base / "project"
             claude_home.mkdir()
@@ -394,7 +387,8 @@ class PackageInstallTests(unittest.TestCase):
                 project, codex_env,
             ).returncode, 0)
 
-            (skill / "references" / "note.md").write_text(UPDATED_NOTE, encoding="utf-8")
+            linked = _linked_reference(skill / "SKILL.md")
+            linked.write_text(UPDATED_NOTE, encoding="utf-8")
             package_check.pin_release(root, "0.0.1")
             updated = _run(
                 ["claude", "plugin", "update", "liskov-policy@liskov-skills", "--scope", "local", "--json"],
@@ -415,10 +409,10 @@ class PackageInstallTests(unittest.TestCase):
                 if item.get("id") == "liskov-policy@liskov-skills"
             )
             claude_note = _linked_reference(
-                Path(claude_row["installPath"]) / "skills" / "fixture-skill" / "SKILL.md"
+                Path(claude_row["installPath"]) / REAL_SKILL / "SKILL.md"
             )
             codex_note = _linked_reference(
-                Path(_parse_json(codex_updated.stdout)["installedPath"]) / "skills" / "fixture-skill" / "SKILL.md"
+                Path(_parse_json(codex_updated.stdout)["installedPath"]) / REAL_SKILL / "SKILL.md"
             )
             self.assertEqual(claude_note.read_text(encoding="utf-8"), UPDATED_NOTE)
             self.assertEqual(codex_note.read_text(encoding="utf-8"), UPDATED_NOTE)
