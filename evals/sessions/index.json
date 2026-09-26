@@ -1,0 +1,75 @@
+{
+  "skillVersion": "0.0.0",
+  "skillVersionStatus": "unreleased",
+  "note": "No fresh Claude Code or Codex session was run. Missing is not a pass. Do not invent a transcript.",
+  "tools": {
+    "claude-code": {
+      "name": "Claude Code",
+      "version": "2.1.283",
+      "status": "missing"
+    },
+    "codex": {
+      "name": "Codex CLI",
+      "version": "0.157.1",
+      "status": "missing"
+    }
+  },
+  "cases": {
+    "valid-v5": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "refuse-v4": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "refuse-v6": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "refuse-other": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "ambiguous": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "missing-evidence": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "invalid-field": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "unavailable": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "zero-empty": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "secret-ref": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "validator-outage": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "preserve-edits": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "no-mutation": {
+      "claude-code": "missing",
+      "codex": "missing"
+    },
+    "misleading-instructions": {
+      "claude-code": "missing",
+      "codex": "missing"
+    }
+  }
+}
