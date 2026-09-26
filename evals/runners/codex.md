@@ -2,7 +2,7 @@
 
 Run these cases in a fresh Codex CLI `0.157.1` session. The paired tool is
 Claude Code `2.1.283`. Both use this repository's `evals/` corpus and the
-skill `liskov-policy` at version `0.0.0` (unreleased).
+skill `liskov-policy` at version `1.0.0`.
 
 A fresh session has no prior conversation. Set `CODEX_HOME` to a disposable
 directory, which is the variable `codex --help` names. Do not use the

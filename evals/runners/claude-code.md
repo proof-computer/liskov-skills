@@ -2,7 +2,7 @@
 
 Run these cases in a fresh Claude Code `2.1.283` session. The paired tool
 is Codex CLI `0.157.1`. Both use this repository's `evals/` corpus and the
-skill `liskov-policy` at version `0.0.0` (unreleased).
+skill `liskov-policy` at version `1.0.0`.
 
 A fresh session has no prior conversation. Point Claude at a disposable
 config directory, not the operator's real Claude configuration. Load this

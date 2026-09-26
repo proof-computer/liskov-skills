@@ -1,7 +1,7 @@
 {
   "skill": "liskov-policy",
-  "skillVersion": "0.0.0",
-  "skillVersionStatus": "unreleased",
+  "skillVersion": "1.0.0",
+  "skillVersionStatus": "released",
   "tools": [
     {
       "id": "claude-code",

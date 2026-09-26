@@ -218,16 +218,16 @@ def corpus_errors(root: Path) -> list[str]:
         return [f"corpus: {exc}"]
     if corpus.get("skill") != "liskov-policy":
         errors.append("corpus skill is not liskov-policy")
-    if corpus.get("skillVersion") != "0.0.0" or corpus.get("skillVersionStatus") != "unreleased":
-        errors.append("skill version must be 0.0.0 unreleased")
+    if corpus.get("skillVersion") != "1.0.0" or corpus.get("skillVersionStatus") != "released":
+        errors.append("skill version must be 1.0.0 released")
     try:
         claude = _manifest_version(root, ".claude-plugin/plugin.json")
         codex = _manifest_version(root, ".codex-plugin/plugin.json")
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         errors.append(str(exc))
         claude = codex = None
-    if claude != "0.0.0" or codex != "0.0.0":
-        errors.append("plugin manifests are not 0.0.0")
+    if claude != "1.0.0" or codex != "1.0.0":
+        errors.append("plugin manifests are not 1.0.0")
     if corpus.get("draftingCommand") != DRAFTING_COMMAND:
         errors.append("drafting command does not match the contract")
     tools = corpus.get("tools")
@@ -313,8 +313,8 @@ def session_layout_errors(root: Path) -> list[str]:
         index = load_index(root)
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         return [f"sessions: {exc}"]
-    if index.get("skillVersion") != "0.0.0" or index.get("skillVersionStatus") != "unreleased":
-        errors.append("session index skill version is not 0.0.0 unreleased")
+    if index.get("skillVersion") != "1.0.0" or index.get("skillVersionStatus") != "released":
+        errors.append("session index skill version is not 1.0.0 released")
     tools = index.get("tools")
     if not isinstance(tools, dict):
         return errors + ["session index tools are missing"]

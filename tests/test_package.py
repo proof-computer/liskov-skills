@@ -81,14 +81,14 @@ def _run(command, cwd, env):
 
 class PackageCheckTests(unittest.TestCase):
     def test_repo_versions_match_and_pin_same_tag(self):
-        self.assertEqual(package_check.manifest_versions(REPO), ("0.0.0", "0.0.0"))
+        self.assertEqual(package_check.manifest_versions(REPO), ("1.0.0", "1.0.0"))
         self.assertEqual(package_check.check_package(REPO), [])
         with tempfile.TemporaryDirectory() as directory:
             root = _stage_manifests(Path(directory))
             package_check.pin_release(root, "v0.1.0")
             self.assertEqual(package_check.manifest_versions(root), ("v0.1.0", "v0.1.0"))
             self.assertEqual(package_check.check_package(root), [])
-            self.assertEqual(package_check.manifest_versions(REPO), ("0.0.0", "0.0.0"))
+            self.assertEqual(package_check.manifest_versions(REPO), ("1.0.0", "1.0.0"))
 
     def test_divergent_versions_fail_until_the_same_tag_is_pinned(self):
         with tempfile.TemporaryDirectory() as directory:
@@ -159,20 +159,20 @@ class PackageCheckTests(unittest.TestCase):
         self.assertEqual(claude["name"], "liskov-policy")
         self.assertEqual(claude["author"]["name"], "PROOF Computer")
         self.assertEqual(claude["license"], "Apache-2.0")
-        self.assertEqual(claude["version"], "0.0.0")
+        self.assertEqual(claude["version"], "1.0.0")
         self.assertEqual(market["name"], "liskov-skills")
         self.assertEqual(market["owner"]["name"], "PROOF Computer")
         self.assertEqual(market["plugins"], [{"name": "liskov-policy", "source": "."}])
         self.assertEqual(codex["name"], "liskov-policy")
-        self.assertEqual(codex["version"], "0.0.0")
+        self.assertEqual(codex["version"], "1.0.0")
         self.assertEqual(codex["skills"], "./skills/")
         installation = (REPO / "docs" / "installation.md").read_text(encoding="utf-8")
         for command in INSTALL_COMMANDS:
             self.assertIn(command, installation)
         readme = (REPO / "README.md").read_text(encoding="utf-8")
         self.assertIn("skills/liskov-policy/", readme)
-        self.assertIn("0.0.0", readme)
-        self.assertNotIn("skill has been released", readme.lower())
+        self.assertIn("1.0.0", readme)
+        self.assertIn("v1.0.0", readme)
 
     def test_package_script_accepts_the_repo(self):
         result = subprocess.run(
@@ -184,7 +184,7 @@ class PackageCheckTests(unittest.TestCase):
             check=False,
         )
         self.assertEqual(result.returncode, 0, result.stderr)
-        self.assertIn("Package OK (version 0.0.0)", result.stdout)
+        self.assertIn("Package OK (version 1.0.0)", result.stdout)
 
 
 class PackageInstallTests(unittest.TestCase):
