@@ -3,13 +3,14 @@
 Shared corpus for `liskov-policy`. Offline checks load this directory.
 They do not run Claude Code or Codex, and they do not invent a transcript.
 
-Skill version `0.0.0` (unreleased). The same cases are for:
+Skill release `1.0.0`. The same cases are for:
 
 - Claude Code `2.1.283`
 - Codex CLI `0.157.1`
 
-No fresh session has been run. [Session index](sessions/index.json) records
-every case as `missing`. Missing is not a pass.
+Release `1.0.0` was checked in both tools. This directory does not store
+those transcripts. [Session index](sessions/index.json) still records every
+case as `missing` here. A missing file is not a pass.
 
 | Path | What it is |
 | --- | --- |

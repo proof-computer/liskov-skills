@@ -2,7 +2,7 @@
 
 Transcripts from a fresh Claude Code `2.1.283` session and a fresh Codex
 CLI `0.157.1` session are stored here. The skill under test is
-`liskov-policy` `0.0.0` (unreleased).
+`liskov-policy` `1.0.0`.
 
 | Tool id | Transcript | Result |
 | --- | --- | --- |

@@ -1,6 +1,6 @@
 {
   "name": "liskov-policy",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Draft a local Liskov application manifest at proof.liskov.application-manifest version 5 and validate it. Writing the file does not publish, deploy, or spend.",
   "skills": "./skills/"
 }

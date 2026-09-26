@@ -95,8 +95,8 @@ class CorpusTests(unittest.TestCase):
         self.assertEqual([item["id"] for item in document["cases"]], list(eval_check.CASE_IDS))
         self.assertEqual(document["draftingCommand"], DRAFTING_COMMAND)
         self.assertEqual(document["recordedStarterReadback"], RECORDED)
-        self.assertEqual(document["skillVersion"], "0.0.0")
-        self.assertEqual(document["skillVersionStatus"], "unreleased")
+        self.assertEqual(document["skillVersion"], "1.0.0")
+        self.assertEqual(document["skillVersionStatus"], "released")
         self.assertEqual(
             [item["id"] for item in document["cases"] if item["expectedClass"] == "contract-valid"],
             ["valid-v5"],
@@ -140,14 +140,14 @@ class CorpusTests(unittest.TestCase):
         readme = (ROOT / "evals" / "README.md").read_text(encoding="utf-8")
         self.assertIn("2.1.283", readme)
         self.assertIn("0.157.1", readme)
-        self.assertIn("0.0.0", readme)
-        self.assertIn("unreleased", readme)
+        self.assertIn("1.0.0", readme)
+        self.assertIn("Release `1.0.0` was checked", readme)
         self.assertIn("evals/sessions/<tool>/<case-id>/transcript.md", readme)
         for name in ("claude-code.md", "codex.md"):
             text = (ROOT / "evals" / "runners" / name).read_text(encoding="utf-8")
             self.assertIn("Claude Code `2.1.283`", text)
             self.assertIn("Codex CLI `0.157.1`", text)
-            self.assertIn("`0.0.0` (unreleased)", text)
+            self.assertIn("`1.0.0`", text)
             self.assertIn("Do not invent a transcript.", text)
             self.assertIn("recorded as missing, not as a pass.", text)
             self.assertIn("evals/sessions/claude-code/<case-id>/transcript.md", text)

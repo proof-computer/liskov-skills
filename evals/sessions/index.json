@@ -1,7 +1,7 @@
 {
-  "skillVersion": "0.0.0",
-  "skillVersionStatus": "unreleased",
-  "note": "No fresh Claude Code or Codex session was run. Missing is not a pass. Do not invent a transcript.",
+  "skillVersion": "1.0.0",
+  "skillVersionStatus": "released",
+  "note": "Release 1.0.0 was checked in fresh Claude Code and Codex sessions. Those transcripts are not stored in this directory. A missing file here is not a pass. Do not invent a transcript.",
   "tools": {
     "claude-code": {
       "name": "Claude Code",
