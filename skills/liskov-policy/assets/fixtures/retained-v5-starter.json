@@ -1,0 +1,38 @@
+{
+  "schema": "proof.liskov.application-manifest",
+  "schemaVersion": 5,
+  "applicationId": "hello-liskov",
+  "metadata": {
+    "description": "Fetch example.com and record the HTTP result in managed logs."
+  },
+  "release": {
+    "mode": "source"
+  },
+  "runtime": {
+    "kind": "javascript",
+    "engine": "nodejs",
+    "entrypoint": {
+      "file": "bundle.js"
+    }
+  },
+  "execution": {
+    "mode": "once"
+  },
+  "deployment": {
+    "schedule": {
+      "duration": "60s"
+    },
+    "spend": {
+      "unit": "service_credit_micros",
+      "perJob": "50000"
+    }
+  },
+  "state": {
+    "mode": "off"
+  },
+  "observability": {
+    "logs": {
+      "enabled": true
+    }
+  }
+}

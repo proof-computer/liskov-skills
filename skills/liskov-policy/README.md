@@ -1,6 +1,11 @@
 # liskov-policy
 
-Implementation destination for the shared V5+ policy-authoring skill.
-Add SKILL.md when the workflow is implemented; this README is not an
-installable skill and makes no availability claim. Keep supporting material
-under references/ and assets/. The skill name does not include a policy version.
+Shared source for drafting one local Liskov V5 application manifest and
+validating it. `SKILL.md` is the workflow. Command limits, verdicts, and
+field rules live under `references/`. Samples live under `assets/fixtures/`.
+`scripts/validate_manifest.py` runs only the local validate command and
+refuses every other argument.
+
+Writing a manifest does not publish, deploy, reserve, or charge. This README
+is not a second workflow and makes no release claim. The sample fixture's
+application id and spend cap are not defaults for a user's draft.
