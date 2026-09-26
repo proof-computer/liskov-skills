@@ -1,0 +1,13 @@
+{
+  "name": "liskov-skills",
+  "description": "Shared Liskov skills. The liskov-policy plugin drafts a local application manifest at proof.liskov.application-manifest version 5. Version 0.0.0 is not a release.",
+  "owner": {
+    "name": "PROOF Computer"
+  },
+  "plugins": [
+    {
+      "name": "liskov-policy",
+      "source": "."
+    }
+  ]
+}
