@@ -93,7 +93,7 @@ number.
 | `application execution` | Out of scope |
 | `application import` | V4 import. Out of scope |
 | `admin`, `custody`, `delete` | Out of scope |
-| `lockbox`, `devtools`, `blackbox`, `runtime-image` | Out of scope |
+| `application lockbox`, `application devtools`, `application runtime-image` | Out of scope. `blackbox` is not a command in this plugin |
 | `organization use` | Changes the persistent organization. Only when the user asked |
 | `organization billing`, `service-credits`, `billing transactions` | Money. liskov-spend |
 

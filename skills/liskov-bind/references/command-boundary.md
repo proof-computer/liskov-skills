@@ -171,8 +171,8 @@ create or source-binding. Do not invent one.
 | `application delete` | Out of scope. |
 | `application run`, `application hold`, `application execution` | Spend or lifecycle paths. Do not run. |
 | `pause`, `resume`, custody, admin | Do not run. |
-| `backfill-identities`, `deployment import`, `artifact-pin restore` | Out of scope. |
-| `lockbox`, `devtools`, `blackbox`, `runtime-image`, `retirement-census` | Out of scope. |
+| `application backfill-identities`, `application deployment import`, `application artifact-pin restore` | Out of scope. |
+| `application lockbox`, `application devtools`, `application runtime-image`, `application retirement-census` | Out of scope. `blackbox` is not a command in this plugin. |
 
 This skill does not push a branch and does not attest. The authoring guide
 says to create and bind before the first push whose workflow attests, and

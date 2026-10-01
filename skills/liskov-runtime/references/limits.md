@@ -112,8 +112,8 @@ Managed secrets are installed after bootstrap. Read them through `env`.
 | Hard-code | Never hard-code a secret. |
 | Log or diagnostic | never log a secret. Do not return it in an error. |
 | Repository | Never put a secret in the repository. |
-| Empty string | An empty string is a present value. Do not replace it. |
-| Absent | `env.get` returns `undefined`. `env.require` throws. Do not treat `""` as absent. |
+| Empty string | On `v0.3.33`, `env.get` returns `undefined` for a zero-length process or `_STD_.env` value. Do not replace that name with a default. |
+| Absent | `env.get` returns `undefined`. `env.require` throws `Slipway runtime env NAME is required`, including when the only stored value is `""`. |
 
 `require` of a name the user did not state is an invented configuration. Leave
 it unwritten.
@@ -172,4 +172,6 @@ capabilities page. Private customer code inside Cargo images is not v1.
 
 An application id, an env name, a URL, an event name, a digest, a price, a
 spend cap, a schedule, a commit, a ref, a catalogue image, or budget consent.
-Explicit zero and empty values stay as the user wrote them.
+Do not replace an explicit zero or an empty string the user named with a
+value you invented. On `v0.3.33` that empty string still does not come back
+from `env.get`.

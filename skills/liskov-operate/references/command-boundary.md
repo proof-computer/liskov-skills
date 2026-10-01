@@ -233,17 +233,16 @@ Do not run these. Do not add flags, examples, or a procedure for them.
 | `delete` | Do not run. Retirement is not a delete. |
 | `import` | Do not run. |
 | V4 `application publish` | Do not run. |
-| `backfill-identities` | Do not run. |
-| `deployment import` | Do not run. |
-| `artifact-pin restore` | Do not run. |
-| `lockbox` | Do not run. |
-| `devtools` | Do not run. |
-| `blackbox` | Do not run. |
-| `runtime-image` | Do not run. |
+| `application backfill-identities` | Do not run. |
+| `application deployment import` | Do not run. |
+| `application artifact-pin restore` | Do not run. |
+| `application lockbox` | Do not run. |
+| `application devtools` | Do not run. |
+| `application runtime-image` | Do not run. `blackbox` is not a command in this plugin. |
 | `application execution` | Do not run. |
 | `application hold` | Do not run. A hold is not a pause. |
 | `application run` | Do not run. |
-| `retirement-census` | Do not run. |
+| `application retirement-census` | Do not run. |
 | `application policy publish` | Do not run. |
 | `source-binding set` | Do not run. |
 | SSH and `runtime-ssh` | Do not run. |

@@ -27,8 +27,10 @@ phone when those facts are missing.
 
 Use an env name, `component`, `revision`, or `appId` only when the user stated
 it. Do not invent an application id, a digest, a price, a spend cap, a
-schedule, a commit, a ref, or budget consent. Keep an explicit zero or empty
-value as the user wrote it. An empty string is a present value.
+schedule, a commit, a ref, or budget consent. Keep an explicit zero the
+user wrote. Do not replace an empty string they named with a default. On
+SDK `v0.3.33`, `env.get` still returns `undefined` for a zero-length
+process or `_STD_.env` value, and `env.require` throws.
 
 Leave every unknown absent and list it as unresolved. Do not copy sample names
 from the public pages unless the user stated those names.
@@ -78,7 +80,8 @@ release that exposes `onCease`. Do not register `onCease`.
 Call `bootstrapSlipwayRuntime` before application work. The build guide's
 sample options and env names are samples. Use them only when the user stated
 those strings. Omit `component`, `revision`, and `appId` when the user did
-not state them. The SDK does not derive an Application id from a slug.
+not state them. The SDK does not derive an Application UID from a slug.
+`status()` exposes `applicationUid` and `applicationId` as different fields.
 
 `whenReady()` is a fail-fast check, not a polling loop. The build guide says
 it returns the current status only when every required capability is ready,
@@ -119,9 +122,13 @@ guide says: "Do not log a secret, include it in a diagnostic, or return it in
 an error." Log details must be JSON-safe and non-secret.
 
 `env.get` returns a final runtime value or `undefined`. `env.require` returns
-a final runtime value or throws when the name is absent. An empty string is a
-present value. Do not replace `""` with a default and do not treat it as
-absent.
+a final runtime value or throws when the lookup is `undefined`. On `v0.3.33`,
+`getRuntimeEnvValue` ignores a zero-length string from the process environment
+and from `_STD_.env`, so `env.get` returns `undefined` for that empty string
+and `env.require` throws `Slipway runtime env NAME is required`. Do not write
+the job as if `""` survives those calls. Do not replace the user's empty
+string with a default. A manifest literal empty string belongs to
+`liskov-configure`, not to this accessor.
 
 Logging is `runtime.log(event, details)`. Do not construct a log writer. The
 event name must be one the user stated. `observability.logs.enabled` is a

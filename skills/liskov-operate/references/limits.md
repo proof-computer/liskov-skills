@@ -14,7 +14,7 @@ in progress.
 | --- | --- | --- |
 | Ready | Current evidence satisfies the desired Application state | Quote it. Do not start a mutation |
 | In progress | Liskov or Acurast is advancing work or waiting for an expected external fact | Wait. Do not retry a normal wait |
-| Needs action | A typed blocker needs customer input or a supported bounded action | Read the Action Plan. Retry only under the command boundary |
+| Needs action | The Application has a current Hold on the organization Action Plan that is waiting for a decision | Read that plan. Retry only under the command boundary |
 | Inactive | Paused, retiring, retired, or not admitting new execution | Read the lifecycle reason the JSON states |
 
 Source: [Application status and Action Plan](https://docs.proof.computer/liskov/operate/status-action-plan).

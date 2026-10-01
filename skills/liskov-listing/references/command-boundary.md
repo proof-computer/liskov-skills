@@ -22,7 +22,7 @@ Application id they give.
 | --- | --- | --- |
 | `application status` | Read customer posture for `APP` | Not a launch, not a spend figure |
 | `application policy explain` | Read the retained explanation | Does not recompute policy, spend, or eligibility |
-| `application artifact-pin list` | Read pin evidence and compare digests | Not `artifact-pin restore` |
+| `application artifact-pin list` | Read pin evidence and compare digests | Not `application artifact-pin restore` |
 
 ```sh
 proof liskov application status APP --json --no-analytics
@@ -84,8 +84,8 @@ Do not run any of these. A dry run is still not a listing launch.
 | `application hold` | Hold release. Out of scope |
 | `application execution` | Out of scope |
 | `admin`, `custody`, `delete` | Out of scope |
-| `lockbox`, `devtools`, `blackbox`, `runtime-image` | Out of scope |
-| `artifact-pin restore` | Mutation. This skill only lists pins |
+| `application lockbox`, `application devtools`, `application runtime-image` | Out of scope. `blackbox` is not a command in this plugin |
+| `application artifact-pin restore` | Mutation. This skill only lists pins |
 | `organization use` | Changes the session default. Only when the user asked |
 
 Money figures are liskov-spend. The prober page prints no price. Do not

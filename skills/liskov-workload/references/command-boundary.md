@@ -31,13 +31,14 @@ A dry run is still not this decision.
 | `application run` | Launch path. Out of scope. |
 | `application execution` | Out of scope. |
 | `application hold` | Out of scope. |
-| `artifact-pin restore` | Out of scope. |
-| `deployment import` | Out of scope. |
+| `application artifact-pin restore` | Out of scope. |
+| `application deployment import` | Out of scope. |
 
 Also do not run `admin`, `custody`, `application delete`,
-`backfill-identities`, `retirement-census`, `runtime-image`, `devtools`,
-`blackbox`, or `lockbox`. The last two are compatibility command names. Do
-not type them.
+`application backfill-identities`, `application retirement-census`,
+`application runtime-image`, `application devtools`, or
+`application lockbox`. `blackbox` is not a command in this plugin. Do
+not invent one.
 
 Reviewed help is not permission to run a command this skill does not own.
 There is no flag to add to make one of them a fit decision.

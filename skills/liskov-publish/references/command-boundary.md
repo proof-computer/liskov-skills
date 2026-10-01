@@ -151,8 +151,8 @@ guide's sample pointer, revision, epoch, ref, and commit are not observations.
 | `application run`, `application hold`, `application execution` | Do not run. Re-arm is not publication. |
 | pause, resume, custody, admin, billing checkout | Do not run. This skill does not spend by those commands. |
 | `organization billing`, `organization service-credits` | Do not run. A balance read is liskov-spend. This skill does not invent a balance. |
-| `backfill-identities`, `deployment import`, `artifact-pin restore` | Out of scope. |
-| `lockbox`, `devtools`, `blackbox`, `runtime-image`, `retirement-census` | Out of scope. |
+| `application backfill-identities`, `application deployment import`, `application artifact-pin restore` | Out of scope. |
+| `application lockbox`, `application devtools`, `application runtime-image`, `application retirement-census` | Out of scope. `blackbox` is not a command in this plugin. |
 
 Do not run `source-binding show` here to fill evidence. The source flags come
 from the attested build the user supplied. If they are missing, name

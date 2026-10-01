@@ -162,9 +162,9 @@ proof liskov ssh APP --identity IDENTITY_PATH --accept-host-key --no-analytics
 ```
 
 That command omits `--print-command` because a verify does not pin. It also
-omits `--json`. With `--json`, the host-key prompt does not run unless
-`--accept-host-key` is already set, so `--json` on an open is not a prompt.
-Do not use this command as the default open.
+omits `--json`. `--json` never runs the host-key prompt. `--json` together
+with `--accept-host-key` pins the key with no prompt. The accepting open
+must omit `--json`. Do not use this command as the default open.
 
 ## Out of scope
 
@@ -176,7 +176,7 @@ Do not run these. Do not teach them.
 | V4 `ingress.ssh` authorized keys | Not this skill. Do not write that policy |
 | `admin`, `custody`, `delete` | Out of scope |
 | `application import`, `application publish` | Out of scope |
-| `lockbox`, `devtools`, `blackbox`, `runtime-image` | Out of scope |
+| `application lockbox`, `application devtools`, `application runtime-image` | Out of scope. `blackbox` is not a command in this plugin |
 | `application execution`, `application hold`, `application run` | Out of scope |
 | Ending the job | This skill does not end the job |
 

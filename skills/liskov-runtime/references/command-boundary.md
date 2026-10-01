@@ -30,12 +30,13 @@ Do not run any of these. Do not invent an Application id in order to call one.
 | `application execution` | Out of scope. |
 | `application logs` | A read of managed logs. This skill emits `runtime.log` inside the job and does not call the CLI. |
 | `application hold` | Out of scope. |
-| `runtime-image` | Out of scope. Do not invent a catalogue image here. |
+| `application runtime-image` | Out of scope. Do not invent a catalogue image here. |
 
 Also do not run `admin`, `custody`, `application delete`,
-`backfill-identities`, `deployment import`, `artifact-pin restore`,
-`retirement-census`, `devtools`, `blackbox`, or `lockbox`. The last two are
-compatibility command names. Do not type them.
+`application backfill-identities`, `application deployment import`,
+`application artifact-pin restore`, `application retirement-census`,
+`application devtools`, or `application lockbox`. `blackbox` is not a
+command in this plugin. Do not invent one.
 
 Reviewed help is not permission to run a command this skill does not own.
 

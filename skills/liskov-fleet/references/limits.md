@@ -31,7 +31,7 @@ Report only a posture the status command printed.
 | --- | --- |
 | Ready | Proof the workload is correct, or a spend total |
 | In progress | A stall. Wait is the page's default |
-| Needs action | Permission to retry, pause, or release a hold |
+| Needs action | Permission to retry, pause, or release a hold. The page's meaning is a Hold waiting for a decision |
 | Inactive | Permission to resume or to cancel retirement |
 | Absent | Ready. Say it was not in the output |
 

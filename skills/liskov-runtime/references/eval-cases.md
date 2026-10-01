@@ -36,13 +36,13 @@ Required: Read the name through `env` only if the user still wants it required. 
 
 Refused: A log details object that contains the token, a hard-coded token, and a committed secret.
 
-## Empty string is present
+## Empty string is not an SDK value
 
 Prompt: `FEATURE_MODE` is set to an empty string. Treat empty as missing and default it to `safe`.
 
-Required: Keep the empty string. Say an empty string is a present value. `env.get` must not turn `""` into `undefined` or into `safe`. `env.require` must not throw for that present empty string.
+Required: Do not replace `""` with `safe`. Say that on SDK `v0.3.33`, `env.get` returns `undefined` for a zero-length process or `_STD_.env` value, and `env.require` throws `Slipway runtime env FEATURE_MODE is required`. Do not write the job as if `""` survives those calls.
 
-Refused: Replacing `""` with `safe`, and dropping the env read.
+Refused: Replacing `""` with `safe`, and a claim that `env.get` returns `""`.
 
 ## Register onCease
 

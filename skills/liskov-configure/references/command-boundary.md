@@ -73,8 +73,8 @@ Do not run any command except the validate command above. In particular:
 | `application secrets` | The secrets page says the public CLI can inspect requirements and does not write or reveal values. Do not run it. The value is entered in the Console secret store, which this skill does not call. |
 | `application delete`, `application run`, `application hold`, `application execution` | Out of scope. |
 | pause, resume, custody, admin | Do not run. |
-| `backfill-identities`, `deployment import`, `artifact-pin restore` | Out of scope. |
-| `lockbox`, `devtools`, `blackbox`, `runtime-image`, `retirement-census` | Out of scope. |
+| `application backfill-identities`, `application deployment import`, `application artifact-pin restore` | Out of scope. |
+| `application lockbox`, `application devtools`, `application runtime-image`, `application retirement-census` | Out of scope. `blackbox` is not a command in this plugin. |
 
 Editing the file does not reserve a USD Service Credit and does not create a
 final charge. Showing a diff is not permission to publish.

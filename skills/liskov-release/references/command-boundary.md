@@ -27,15 +27,16 @@ Do not put one in the workflow. A dry run is still not this skill.
 | `application publish` | V4 publication verb. Out of scope. |
 | `application policy publish` | Publishes a policy version. |
 | `source-binding set` | Server source binding. `liskov-bind` owns that later step. Do not run it. |
-| `artifact-pin list` | The actions guide shows this read. Reviewed help includes `--json` and global `--no-analytics`. The guide's example omits `--no-analytics` and uses a sample Application id. This skill does not run the read and does not copy that example. |
-| `artifact-pin restore` | Out of scope. |
+| `application artifact-pin list` | The actions guide shows this read. Reviewed help includes `--json` and global `--no-analytics`. The guide's example omits `--no-analytics` and uses a sample Application id. This skill does not run the read and does not copy that example. |
+| `application artifact-pin restore` | Out of scope. |
 | `application run` | Launch path. Out of scope. |
 | `application execution` | Out of scope. |
 
 Also do not run `admin`, `custody`, `application delete`,
-`backfill-identities`, `deployment import`, `retirement-census`,
-`runtime-image`, `devtools`, `blackbox`, or `lockbox`. The last two are
-compatibility command names. Do not type them.
+`application backfill-identities`, `application deployment import`,
+`application retirement-census`, `application runtime-image`,
+`application devtools`, or `application lockbox`. `blackbox` is not a
+command in this plugin. Do not invent one.
 
 The actions guide's pin-list example is not a workflow step. Do not "fix"
 it by adding flags and running it from this skill.

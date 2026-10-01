@@ -73,7 +73,7 @@ Do not translate a missing posture into Ready.
 | --- | --- |
 | Ready | Current evidence satisfies the desired state |
 | In progress | Liskov or Acurast is advancing or waiting |
-| Needs action | The customer must supply input, or take one supported bounded action |
+| Needs action | A current Hold on the organization Action Plan is waiting for a decision |
 | Inactive | Paused, retiring, retired, or otherwise not admitting new execution |
 
 Posture is not a raw job state. Do not open the organization Action Plan
