@@ -1,9 +1,16 @@
 # Installation
 
 Release `1.0.0` is git tag `v1.0.0`. PROOF Computer maintains the repository
-and this release. The shared source is `skills/liskov-policy/`. Claude Code
-and Codex both use that directory. Packaging does not copy the workflow into
-a second tree. The skill release version is not a policy schema version.
+and this release. The tagged source for that release is `skills/liskov-policy/`.
+Claude Code and Codex both use that directory. Packaging does not copy the
+workflow into a second tree. The skill release version is not a policy schema
+version.
+
+The plugin's skill path is `skills/`. A checkout of tag `v1.0.0` contains
+`liskov-policy` only. A checkout of a later commit on the default branch also
+loads every other task skill present in that commit. Those skills are not part
+of tag `v1.0.0` until a later tag says so. `--ref v1.0.0` below selects the
+tagged release.
 
 ## Prerequisites
 
