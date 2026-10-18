@@ -47,7 +47,7 @@ it by adding flags and running it from this skill.
 | --- | --- |
 | `permissions.contents` | `read`, copied from the actions page. |
 | `permissions.id-token` | `write`, GitHub OIDC. Not a spend credential. |
-| `uses` | The actions page's workflow path at `@v1`, or that path at the reviewed commit when the user asked for the security-sensitive pin. |
-| `with` | Only keys the page's caller shows, and only values the user stated. |
-| Secrets | None by default. No Liskov API token. No service-credit key. No pasted key value. |
+| `uses` | The actions page's workflow path at `@v2`, or that path at the reviewed commit `2745f48e6c2619f4d431fb80d20d0e8c75068832` when the user asked for the security-sensitive pin. |
+| `with` | Only keys the page's caller shows, plus `ipfs-endpoint` when the user stated a custom endpoint URL, and only values the user stated. |
+| Secrets | None by default. No Liskov API token. No service-credit key. No pasted key value. When a stated custom endpoint needs a key, only `LISKOV_IPFS_API_KEY: ${{ secrets.LISKOV_IPFS_API_KEY }}`. |
 | Publish, create, import, source-binding | Absent. |

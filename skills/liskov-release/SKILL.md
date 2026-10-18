@@ -46,24 +46,29 @@ Copy the revision from
 [Build and attest with GitHub Actions](https://docs.proof.computer/liskov/build/github-actions).
 Do not invent a tag or a commit.
 
-The page says the moving `v1` release is live, that production acceptance
-recorded for this contract used `v1.2.2`, and that callers should use `@v1`
-to receive compatible v1 fixes. Security-sensitive callers may instead pin
-the reviewed commit `cbca2cde077df0cfd6be894519c6f8e4915e386a` and update it
-deliberately.
+The page says the moving `v2` release is live. The production acceptance
+recorded for the `v1` contract used `v1.2.2`. Callers should use `@v2` to
+receive compatible fixes. Security-sensitive callers may instead pin the
+reviewed commit `2745f48e6c2619f4d431fb80d20d0e8c75068832` (`v2.0.0`) and
+update it deliberately. The page says `v2` moved to `v2.2.0` on 11 October
+2026. That release changes only the internal runtime-image workflows;
+`acurast-app.yml` and the actions it calls are unchanged from `v2.1.0`.
 
 | Caller asked | `uses` revision to write |
 | --- | --- |
-| Nothing about a pin, or the moving release | `proof-computer/liskov-github-actions/.github/workflows/acurast-app.yml@v1` |
-| A security-sensitive pin | The same workflow path, with the page's reviewed commit in place of `@v1` |
+| Nothing about a pin, or the moving release | `proof-computer/liskov-github-actions/.github/workflows/acurast-app.yml@v2` |
+| A security-sensitive pin | The same workflow path, with the page's reviewed commit in place of `@v2` |
 
 The workflow file name `acurast-app.yml` is the path that page prints.
 
-Do not rewrite `@v1` to `@v1.2.2`. Capabilities says the moving `v1` tag was
-verified at `v1.3.2`, and that `liskov-github-actions` `v1.2.4` contains the
-exact-bound import (`aa1b83f`). Those are records on the capabilities page.
-They are not the uses revision the actions page says to write. `aa1b83f` is
-not an artifact digest. When a digest is not in hand, do not invent a digest.
+Do not write `v1.2.2`, `v2.0.0`, `v2.1.0`, or `v2.2.0` as the uses revision.
+Capabilities says the moving `v2` tag started at `v2.0.0` and is at `v2.2.0`
+since 11 October 2026, with `acurast-app.yml` unchanged from `v2.1.0`. The
+`v1` contract was verified at `v1.3.2`, and `liskov-github-actions` `v1.2.4`
+contains the exact-bound import (`aa1b83f`). Those are records. They are not
+the uses revision the actions page says to write. Do not write the
+runtime-image recipe. `aa1b83f` is not an artifact digest. When a digest is
+not in hand, do not invent a digest.
 
 ## 3. Write the workflow
 
@@ -80,8 +85,9 @@ When they gave a path, write that file and no other:
   sample shows `app-id`, `working-directory`, `entrypoint`, and
   `authored-manifest-path`. The reusable workflow also accepts
   `node-version` and `pnpm-version`. Write either only when the user stated
-  that version. Do not write the workflow's own default `"24"`. Do not
-  invent any other input key.
+  that version. Do not write the workflow's own default `"24"`. When the
+  user stated a custom IPFS endpoint URL, write that URL as `ipfs-endpoint`.
+  Do not invent any other input key.
 - Add a `push` branch only when the user stated that ref. Do not default the
   branch to `main`.
 - Add `workflow_dispatch` only when the user asked for a manual run.
@@ -104,10 +110,12 @@ ready.
 The workflow must not contain a Liskov API token, a service-credit key, a
 publish step, or a `proof liskov` publish, create, or source-binding command.
 It must not contain any `proof liskov` command. The default IPFS proxy
-requires no repository secret. Do not add `ACURAST_IPFS_URL` or
-`ACURAST_IPFS_API_KEY` unless the user asked for a custom proxy. Those names
-authorize upload to that proxy, not Acurast spend and not Liskov policy
-publication. Never write the key's value into the workflow or the reply.
+requires no repository secret. A stated custom IPFS endpoint is the
+`ipfs-endpoint` input; it is not a secret. If that endpoint needs a key,
+pass it only as `LISKOV_IPFS_API_KEY: ${{ secrets.LISKOV_IPFS_API_KEY }}`.
+Neither authorizes Acurast spend or Liskov policy publication. Refuse a
+pasted key value, and never write or echo it. Refuse the retired Acurast
+IPFS environment names. Do not write them.
 
 ## 4. What the pin proves
 

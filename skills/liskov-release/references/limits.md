@@ -7,18 +7,21 @@ Read this while writing the workflow. It is not a second workflow. See
 
 The actions page prints one caller line:
 
-`proof-computer/liskov-github-actions/.github/workflows/acurast-app.yml@v1`
+`proof-computer/liskov-github-actions/.github/workflows/acurast-app.yml@v2`
 
-It says callers should use `@v1`. It says security-sensitive callers may
+It says callers should use `@v2`. It says security-sensitive callers may
 instead pin the reviewed commit
-`cbca2cde077df0cfd6be894519c6f8e4915e386a`.
+`2745f48e6c2619f4d431fb80d20d0e8c75068832` (`v2.0.0`).
 
 | Printed fact | Where | Write it on `uses`? |
 | --- | --- | --- |
-| `@v1` | Actions page. Callers should use it. | Yes, unless the user asked for the security-sensitive pin. |
-| Commit `cbca2cde077df0cfd6be894519c6f8e4915e386a` | Actions page. Security-sensitive pin. | Yes, only when the user asked for that pin. Same workflow path. |
-| `v1.2.2` | Actions page. Production acceptance recorded for this contract. | No. Not the uses revision. |
-| `v1.3.2` | Capabilities. Moving `v1` tag verified there. Also named for release-gated encrypted payload execution. | No. |
+| `@v2` | Actions page. Callers should use it. | Yes, unless the user asked for the security-sensitive pin. |
+| Commit `2745f48e6c2619f4d431fb80d20d0e8c75068832` | Actions page. Security-sensitive pin for `v2.0.0`. | Yes, only when the user asked for that pin. Same workflow path. |
+| `v2.0.0` | Actions page. The release of that reviewed commit. | No. Not the uses revision. |
+| `v2.1.0` | Actions page. `acurast-app.yml` is unchanged from this release. | No. |
+| `v2.2.0` | Actions page. Moving `v2` tag on 11 October 2026. Changes only the internal runtime-image workflows. | No. Do not write that recipe. |
+| `v1.2.2` | Actions page. Production acceptance recorded for the `v1` contract. | No. Not the uses revision. |
+| `v1.3.2` | Capabilities. The `v1` contract was verified there. Also named for release-gated encrypted payload execution. | No. |
 | `v1.2.4` and `aa1b83f` | Capabilities. Exact-bound import inside `liskov-github-actions`. | No. `aa1b83f` is not an artifact digest. |
 
 Do not invent a tag, a commit, or an artifact digest.
@@ -44,7 +47,7 @@ permissions:
 
 jobs:
   artifact:
-    uses: proof-computer/liskov-github-actions/.github/workflows/acurast-app.yml@v1
+    uses: proof-computer/liskov-github-actions/.github/workflows/acurast-app.yml@v2
     with:
       app-id: status-worker
       working-directory: .
@@ -64,7 +67,8 @@ The only `with` keys this sample shows are `app-id`, `working-directory`,
 `pnpm-lock.yaml`. Do not invent a directory. The caller sample does not
 show `node-version` or `pnpm-version`. The reusable workflow accepts both.
 Write one only when the user stated that version. Do not write `"24"` as a
-default.
+default. When the user stated a custom IPFS endpoint URL, the additional
+`with` key is `ipfs-endpoint`. Do not invent any other input key.
 
 ## No spend credential
 
@@ -75,12 +79,15 @@ spend-capable credential in GitHub."
 | --- | --- |
 | `permissions.contents: read` | A Liskov API token |
 | `permissions.id-token: write` (GitHub OIDC, not a spend credential) | A service-credit key |
-| No repository secret for the default IPFS proxy | A pasted proxy key or URL value |
-| `ACURAST_IPFS_URL` and `ACURAST_IPFS_API_KEY` only if the user asked for a custom proxy, as names, never as values | A publish step, a create step, or a source-binding step |
+| No repository secret for the default IPFS proxy | A pasted proxy key value |
+| A stated custom endpoint URL as the `ipfs-endpoint` input. It is not a secret. | A pasted endpoint URL written as a secret, or a retired Acurast IPFS environment name |
+| `LISKOV_IPFS_API_KEY: ${{ secrets.LISKOV_IPFS_API_KEY }}` only when that endpoint needs a key | A publish step, a create step, or a source-binding step |
 
-The page says those two custom-proxy names authorize upload to that proxy,
-not Acurast spend and not Liskov policy publication. They are still secrets.
-Do not echo a value the user pasted.
+The page says a custom IPFS endpoint is the `ipfs-endpoint` input and is not
+a secret. If that endpoint needs a key, pass it as the `LISKOV_IPFS_API_KEY`
+secret. Neither authorizes Acurast spend or Liskov policy publication. Do not
+echo a key value the user pasted. Do not write the retired Acurast IPFS
+environment names.
 
 The called workflow uploads without spending. It does not reserve a USD
 Service Credit, select a deployment schedule, or register a job. Do not add
